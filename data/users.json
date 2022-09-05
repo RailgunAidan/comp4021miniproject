@@ -1,0 +1,14 @@
+{
+ "bruh": {
+  "name": "bruh",
+  "password": "$2b$10$0v6GopPksbA1rl2RX4naX.rK0cjLx09YmipLBm/7Ov8Gv5u9E0TgW"
+ },
+ "haha": {
+  "name": "haha",
+  "password": "$2b$10$vhDhDH5pXAGoAg2Q00aU0OOSS4v3H..Ow8LMeY.8RFSP.1iNagHuG"
+ },
+ "username": {
+  "name": "name",
+  "password": "$2b$10$Ke3yJsmm2stEVmlGriAgp.3nSO0VDKfbocVpRDuSHzGotrGM6n3c2"
+ }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Battle Ships</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat&display=swap" rel="stylesheet">
+    <!-- Remove the favicon.cio err -->
+    <link rel="shortcut icon" href="#">
+    <script>
+      let gameMode = 'multiPlayer'
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id = "bg">
+      <div class="container">
+        <div class="player p1">
+          <div id = "p1">Unconnected </div>
+          <!-- <div class="connected">Connected</div>      -->
+          <div class="ready" id="p1ready">Ready</div>
+        </div>
+        
+        <div class="player p2">
+          <div id = "p2">Unconnected </div>
+          <!-- <div class="connected">Connected</div> -->
+          <div class="ready" id="p2ready">Ready</div>
+        </div>
+
+        <div id= "cheat_container" style = "display: none">
+          <button id="revealbutton" class="wallhack_btn" >Reveal Enemy</button>
+          <button id="nuke" class="nuke_btn">!!! Tactical Nuke !!!</button>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <div class="battleship-grid grid-user"></div>
+        <div class="battleship-grid grid-computer"></div>
+      </div>
+
+      <div class="container hidden-info">
+        <div class="setup-buttons" id="setup-buttons">
+          <button id="start" class="btn">Start Game</button>
+          <button id="rotate" class="btn">Rotate Your Ships</button>
+          <button id="reset" class="btn">Reset</button>
+          <button id="random" class="btn">Random</button>        
+        </div>
+        <div class="action-buttons" id="action-buttons" style="display: none">        
+          <button id="fire" class="btn">Fire</button>
+          <button id="sonar" class="btn"  style = "background-color: #555555">Sonar</button>
+        </div>
+        <h3 id="whose-go" class="info-text"> Place your ships to start game</h3>
+        <h3 id="info" class="info-text"></h3>
+        <h3 id="round_info" class="info-text"></h3>
+      </div>
+
+      <div class="container">
+        <div class="grid-display">
+          <div class="ship destroyer-container" draggable="true"><div id="destroyer-0"></div><div id="destroyer-1"></div></div>
+          <div class="ship submarine-container" draggable="true"><div id="submarine-0"></div><div id="submarine-1"></div><div id="submarine-2"></div></div>
+          <div class="ship cruiser-container" draggable="true"><div id="cruiser-0"></div><div id="cruiser-1"></div><div id="cruiser-2"></div></div>
+          <div class="ship battleship-container" draggable="true"><div id="battleship-0"></div><div id="battleship-1"></div><div id="battleship-2"></div><div id="battleship-3"></div></div>
+          <div class="ship carrier-container" draggable="true"><div id="carrier-0"></div><div id="carrier-1"></div><div id="carrier-2"></div><div id="carrier-3"></div><div id="carrier-4"></div></div>
+        </div>
+        <div class = "hide-display">
+        
+        </div>
+      </div>
+
+      <div class="container">
+        <form>
+          <input type="text" id="cheat">
+          <button type='button' id="cheat_button" >Input</button>
+        </form>
+      </div>
+
+    </div>
+    <div id="signin-overlay" class="overlay row">
+      <div class="content shadow row">
+          <form id="signin-form" class="col">
+              <div class="caption">SIGN IN WITH YOUR ACCOUNT</div>
+              <div class="spacer-0"></div>
+              <input id="signin-username" placeholder="Enter your username"></input>
+              <input id="signin-password" type="password" placeholder="Enter your password"></input>
+              <div class="spacer-0"></div>
+              <button type="submit">Sign In</button>
+              <div id="signin-message" class="warning center"></div>
+              <div class="spacer-grow"></div>
+          </form>
+
+          <div class="spacer-0"></div>
+
+          <form id="register-form" class="col">
+              <div class="caption">OR, REGISTER IF YOU DO NOT HAVE ONE</div>
+              <div class="spacer-0"></div>
+              <input id="register-username" maxlength="10" placeholder="Enter your username"></input>
+              <input id="register-name" maxlength="16" placeholder="Enter your name"></input>
+              <input id="register-password" type="password" placeholder="Enter your password"></input>
+              <input id="register-confirm" type="password" placeholder="Enter your password again"></input>
+              <div class="spacer-0"></div>
+              <button type="submit">Register</button>
+              <div id="register-message" class="warning center"></div>
+          </form>
+      </div>
+    </div>
+
+    <div id="gameover_screen" class="gameover" style="display:none">
+      <div id = "gameover_turn" class = "gameover_turn" style = "text-align: center"> Gameover at Turn XXXXX</div>
+      <br>
+      <div class="container">
+        <div class="gameover_player_1_status">
+          <div id = "gameover_player_1_name"><u><b> Player 1 </b></u></div>
+          <div id = "gameover_player_1_win"> Winner </div>
+          <div id = "gameover_player_1_hit"> Hit: XX shots</div>
+          <div id = "gameover_player_1_miss"> Miss: XX shots</div>
+          <div id = "gameover_player_1_accuracy"> Accuracy: XX.XX%</div>
+          <div id = "gameover_player_1_sunk"> No. of ship sunk: X </div>
+          <div id = "gameover_player_1_remain"> No. of ship remain: X </div>
+          <div id = "gameover_player_1_damage"> Damage of ship: XX% </div>
+          <br> <br> <br> <br>
+          <!-- <button id="play_again" class="gameover_btn">Play again</button> -->
+          <a href="/multiplayer.html" class="btn splash-btn" style = "color:#FFFFFF"><b>Play again</b></a>
+          
+        </div>
+
+        <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
+        
+        <div class="gameover_player_2_status">
+          <div id = "gameover_player_2_name"><u><b> Player 2 </b></u></div>
+          <div id = "gameover_player_2_win"> Loser </div>
+          <div id = "gameover_player_2_hit"> Hit: XX shots</div>
+          <div id = "gameover_player_2_miss"> Miss: XX shots</div>
+          <div id = "gameover_player_2_accuracy"> Accuracy: XX.XX%</div>
+          <div id = "gameover_player_2_sunk"> No. of ship sunk: X </div>
+          <div id = "gameover_player_2_remain"> No. of ship remain: X </div>
+          <div id = "gameover_player_2_damage"> Damage of ship: XX% </div>
+          <br> <br> <br> <br>
+          <!-- <button id="exit" class="gameover_btn">Back to Front Page</button> -->
+          <a href="/index.html" class="btn splash-btn" style = "color:#FFFFFF"><b>Back to Front Page</b></a>
+          
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="ui.js"></script>
+    <script src="registration.js"></script>
+    <script src="authentication.js"></script>
+    <script>
+      
+      $(document).ready(function() {
+          UI.initialize();
+  
+          // Validate the signin
+          Authentication.validate(
+              () => {
+                  SignInForm.hide();
+                  Socket.connect();
+              },
+              () => { SignInForm.show(); }
+          );
+  
+      })
+    </script>
+  </body>
+</html>

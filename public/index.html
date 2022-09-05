@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Battle Ships</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="splash-container">
+      <h1 class="splash-title">Battleship Online</h1>
+      <!-- <div id="welcome_player" class="welcome_message"></div> -->    
+      
+      <div class = "front_info"> Battleship is a strategy type guessing game for two players. It is played on ruled grids on which each player's fleet of warships are marked. </div>
+      <div class = "front_info"> The locations of the fleets are concealed from the other player. </div>  
+      <div class = "front_info"> Players alternate turns firing at the other player's grid, and the objective of the game is to destroy the opposing player's fleet.</div>
+
+      <div class = "front_info"> You can fire as many shots as the number of unsunken ships you currently have </div>
+      <div class = "front_info"> The sonar function allows you to reveal a 3x3 area temporarily, if your submarine is intact </div>
+      
+      <br><br><br><br>
+      <div>
+        <a href="/multiplayer.html" class="btn splash-btn" style = "color:#FFFFFF"><b>Login to start Game</b></a>
+      </div>
+    </div>     
+
+    <img src="/images/bs.svg" class="splash-battleship-image">
+  <!-- <div id="signin-overlay" class="overlay row">
+      <div class="content shadow row">
+          <form id="signin-form" class="col">
+              <div class="caption">SIGN IN WITH YOUR ACCOUNT</div>
+              <div class="spacer-0"></div>
+              <input id="signin-username" placeholder="Enter your username"></input>
+              <input id="signin-password" type="password" placeholder="Enter your password"></input>
+              <div class="spacer-0"></div>
+              <button type="submit">Sign In</button>
+              <div id="signin-message" class="warning center"></div>
+              <div class="spacer-grow"></div>
+          </form>
+
+          <div class="spacer-0"></div>
+
+          <form id="register-form" class="col">
+              <div class="caption">OR, REGISTER IF YOU DO NOT HAVE ONE</div>
+              <div class="spacer-0"></div>
+              <input id="register-username" maxlength="10" placeholder="Enter your username"></input>
+              <input id="register-name" maxlength="16" placeholder="Enter your name"></input>
+              <input id="register-password" type="password" placeholder="Enter your password"></input>
+              <input id="register-confirm" type="password" placeholder="Enter your password again"></input>
+              <div class="spacer-0"></div>
+              <button type="submit">Register</button>
+              <div id="register-message" class="warning center"></div>
+          </form>
+      </div>
+    </div> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="ui.js"></script>
+    <script src="registration.js"></script>
+    <script src="authentication.js"></script>
+  <script>
+    /*
+    $(document).ready(function() {
+        UI.initialize();
+
+        // Validate the signin
+        Authentication.validate(
+            () => {
+                SignInForm.hide();
+                Socket.connect();
+            },
+            () => { SignInForm.show(); }
+        );
+
+    });
+    */
+    </script> 
+  </body>
+</html>
