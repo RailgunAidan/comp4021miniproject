@@ -1,5 +1,6 @@
 ## **COMP4021 Group 19 Battleship multiplayer game**
 
+Member: Anthony, Aidan, Nelson 
 To run the following command to play the game:
 1. `npm install`
 2. `npm run start`
